@@ -5,9 +5,9 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "msedge",
+            "type": "chrome",
             "request": "launch",
-            "name": "client: edge",
+            "name": "client: chrome",
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}"
         },
@@ -27,7 +27,7 @@
             "name": "fullstack: nuxt",
             "configurations": [
                 "server: nuxt",
-                "client: edge"
+                "client: chrome"
             ]
         }
     ]
