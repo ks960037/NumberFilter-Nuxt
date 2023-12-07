@@ -219,26 +219,26 @@ export default {
     // 報表導出功能
     downloadCSV() {
       // 將處理後的內容轉換為 CSV 格式
-      let csvContent = '分類,電話號碼\n';
+      let csvContent = '';
       for (let category in this.processedContent) {
         for (let number of this.processedContent[category]) {
-          csvContent += `${category},${number}\n`;
+          csvContent += `${number}\n`;
         }
+        // 創建一個 Blob 對象來儲存 CSV 內容
+        const blob = new Blob([csvContent], { type: 'text/txt;charset=utf-8;' });
+        // 創建一個可以下載的 URL
+        const url = URL.createObjectURL(blob);
+        // 創建一個隱藏的下載鏈接
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${category}.txt`;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        // 觸發下載
+        link.click();
+        // 移除下載鏈接
+        document.body.removeChild(link);
       }
-      // 創建一個 Blob 對象來儲存 CSV 內容
-      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      // 創建一個可以下載的 URL
-      const url = URL.createObjectURL(blob);
-      // 創建一個隱藏的下載鏈接
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = '電話號碼分析結果.csv';
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      // 觸發下載
-      link.click();
-      // 移除下載鏈接
-      document.body.removeChild(link);
     }
   }
 };
