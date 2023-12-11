@@ -50,7 +50,7 @@
         <div class="card mt-3">
           <div class="card-header">{{ category }}</div>
           <div class="card-body">
-            <div v-for="(number, index) in numbers" :key="index">{{ number }}</div>
+            <div v-for="(number, index) in numbers" :key="index">{{ index + "." + number }}</div>
           </div>
         </div>
       </div>
@@ -219,8 +219,9 @@ export default {
     // 報表導出功能
     downloadCSV() {
       // 將處理後的內容轉換為 CSV 格式
-      let csvContent = '';
+      let csvContent;
       for (let category in this.processedContent) {
+        csvContent = '';
         for (let number of this.processedContent[category]) {
           csvContent += `${number}\n`;
         }
